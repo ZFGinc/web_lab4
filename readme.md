@@ -630,51 +630,98 @@ function last(arr) { return arr[arr.length-1]; }
 ### [Array Deep Count](https://www.codewars.com/kata/array-deep-count)
 
 ```js
-//
+function deepCount(a){
+  let sum = a.length;
+  
+  a.forEach(element => { if(Array.isArray(element)) sum += deepCount(element); });
+  
+  return sum
+}
 ```
 
 <p align = "center">
-<img src = "img/codewars_screens/2.PNG">
+<img src = "img/codewars_screens/2.png">
 </p>
 
 ### [Length of missing array](https://www.codewars.com/kata/length-of-missing-array)
 
 ```js
-//
+function getLengthOfMissingArray(arrayOfArrays) {
+  if (arrayOfArrays === null || arrayOfArrays.length === 0) {
+    return 0
+  }
+  for(let i = 0; i < arrayOfArrays.length; i++) {
+    if (arrayOfArrays[i] === null || arrayOfArrays[i].length === 0) return 0
+  }
+  arrayOfArrays.sort(function(a, b) {
+    return a.length - b.length;
+  })
+  for(let i = 0; i < arrayOfArrays.length; i++) {
+    if (arrayOfArrays[i].length + 1 !== arrayOfArrays[i + 1].length) {
+      return arrayOfArrays[i].length + 1
+    }
+  }
+}
 ```
 
 <p align = "center">
-<img src = "img/codewars_screens/3.PNG">
+<img src = "img/codewars_screens/3.png">
 </p>
 
 ### [Pair of gloves](https://www.codewars.com/kata/pair-of-gloves)
 
 ```js
-//
+let pairs = 0, counts = {};
+
+    for (const glove of gloves) {
+        if (isNaN(counts[glove])) counts[glove] = 0;
+
+        if (++counts[glove] === 2) {
+            counts[glove] -= 2;
+            pairs++;
+        }
+    }
+    
+    return pairs;
 ```
 
 <p align = "center">
-<img src = "img/codewars_screens/4.PNG">
+<img src = "img/codewars_screens/4.png">
 </p>
 
 ### [Sorting by bits](https://www.codewars.com/kata/sorting-by-bits)
 
 ```js
-//
+function sortByBit(arr) {  
+  arr.sort((a,b) => a.toString(2).replace(/0/g, '').length - b.toString(2).replace(/0/g, '').length || a-b);
+  
+  return arr;
+}
 ```
 
 <p align = "center">
-<img src = "img/codewars_screens/5.PNG">
+<img src = "img/codewars_screens/5.png">
 </p>
 
 ### [Let's Recycle!](https://www.codewars.com/kata/lets-recycle)
 
 ```js
-//
+function recycle(arr) {
+  let paper = [], glass = [], organic = [], plastic = [];
+
+  arr.forEach(obj => {  
+    if(obj.material === 'paper' || obj.secondMaterial === 'paper' ) paper.push(obj.type)
+    if(obj.material === 'glass' || obj.secondMaterial === 'glass') glass.push(obj.type)
+    if(obj.material === 'organic' || obj.secondMaterial === 'organic') organic.push(obj.type)
+    if(obj.material === 'plastic' || obj.secondMaterial === 'plastic') plastic.push(obj.type)
+  });
+
+  return [paper, glass, organic, plastic]
+}
 ```
 
 <p align = "center">
-<img src = "img/codewars_screens/6.PNG">
+<img src = "img/codewars_screens/6.png">
 </p>
 
 ***
